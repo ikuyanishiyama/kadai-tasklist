@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  get 'sessions/new'
+
+  get 'sessions/create'
+
+  get 'sessions/destroy'
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   
   # #CRUD
@@ -26,9 +32,20 @@ Rails.application.routes.draw do
   # get "tasks/:id/edit", to: "tasks#edit"
 
   #ユーザがトップページにアクセスしてきたら、indexアクションを実行しろ（root = "/"トップページをGET)
-  root to: "tasks#index"
+  root to: "toppages#index"
   
-  #resources :tasks 
+  #ユーザ登録機能用のフォームページ
+  #signupのurlにアクセスしてきたら、usersコントローラのnewアクション実行
+  get "signup", to: "users#new"
+  #以下アカウントに関連したそれぞれのアクション
+  resources :users, only: [:create]
+  
+  #ログイン機能用のルーティング
+  get "login", to: "sessions#new"
+  post "login", to: "sessions#create"
+  delete "logout", to: "sessions#destroy"
+  
+  #タスク関連のルーティング
   resources :tasks
 
 end
