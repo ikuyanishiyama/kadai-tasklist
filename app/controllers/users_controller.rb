@@ -8,7 +8,7 @@ class UsersController < ApplicationController
     
     if @user.save
       flash[:success] = "登録に成功しました"
-      render template: "sessions/new"
+      redirect_to "/login"
     else
       flash.now[:danger] = "登録に失敗しました"
       render :new
