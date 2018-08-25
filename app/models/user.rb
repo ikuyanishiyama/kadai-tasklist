@@ -5,4 +5,6 @@ class User < ApplicationRecord
                     format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i },
                     uniqueness: { case_sensitive: false } #カラを許さず、長さ255文字以内、正規表現で重複を許さない(大文字と小文字は区別しない)
   has_secure_password
+
+  has_many :tasks
 end
